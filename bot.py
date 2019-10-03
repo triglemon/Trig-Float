@@ -1,5 +1,6 @@
 """
-Trig-Float. Personal helper bot to keep me "afloat".
+_.-=[ Trig-Float ]=-._
+Personal helper bot to keep me "afloat".
 """
 import discord
 from discord.ext import commands
@@ -23,10 +24,9 @@ async def on_ready() -> None:
 
 @bot.command()
 @commands.is_owner()
-async def cog(ctx: commands.Context, command: str, extension_name: str) -> None:
+async def cog(command: str, extension_name: str) -> None:
     """
     If the user that triggered this is the owner of the bot, allow loading/unloading/reloading of specified cog.
-    :param ctx: command context
     :param command: str
     :param extension_name: str
     :return: None
