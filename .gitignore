@@ -2,3 +2,4 @@
 venv/
 token
 __pycache__/
+discord.log
