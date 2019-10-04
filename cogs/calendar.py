@@ -10,6 +10,7 @@ The format should go like this:
 """
 from discord.ext import commands
 from typing import List
+from datetime import datetime as dt
 
 
 class Calendar(commands.Cog):
@@ -20,15 +21,22 @@ class Calendar(commands.Cog):
         """
         self.bot = bot
 
-    @commands.command
-    async def log(self, ctx, *message: List[str]) -> None:
+    @commands.Cog.listener()
+    async def on_message(self, ctx) -> None:
         """
+        This listener function should ONLY take in messages under the following format:
+        {message} {time}
+        For example:
+        Everything we need that is not food or love is here in the tabloid racks. 2019/10/3/4/39
         :param ctx: commands context
-        :param message: List[str]
         :return: None
         """
-        for x in message:
-            print(x)
+        if str(ctx.channel.category) == 'Calendar':
+
+            entry = ctx.content.rsplit(' ', 1)
+            # We're splitting 2019/9/3 into an actual time
+            deadline = dt(*[int(unit) for unit in entry[1].split('/')])
+            print(entry, deadline)
 
 
 def setup(bot):
