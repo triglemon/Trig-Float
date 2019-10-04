@@ -13,6 +13,7 @@ from typing import List
 from datetime import datetime as dt
 
 
+
 class Calendar(commands.Cog):
     def __init__(self, bot) -> None:
         """
@@ -33,10 +34,15 @@ class Calendar(commands.Cog):
         """
         if str(ctx.channel.category) == 'Calendar':
 
-            entry = ctx.content.rsplit(' ', 1)
+            cal_entry = ctx.content.rsplit(' ', 1)
             # We're splitting 2019/9/3 into an actual time
-            deadline = dt(*[int(unit) for unit in entry[1].split('/')])
-            print(entry, deadline)
+            date = dt(*[int(unit) for unit in cal_entry[1].split('/')])
+            if date.hour:
+                time = date.strftime('%H:%M, ')
+            else:
+                time = ''
+            message = f'{ctx.channel}: {cal_entry[0]} — {time}{date.strftime("%A, %b %d, %Y")}'
+            print(message)
 
 
 def setup(bot):
